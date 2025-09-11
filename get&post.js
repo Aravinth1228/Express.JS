@@ -10,6 +10,10 @@ app.get('/user', (req, res, next) => {
 app.post('/client', (req, res, next) => {
     res.send('<h1>Hello from POST request!</h1>');
 });
+app.use( (req, res, next) => {
+  res.send('<h1>404 Page Error</h1>')
+    next();
+})
 
 app.listen(3000);
 console.log('Server is running on http://localhost:3000');
