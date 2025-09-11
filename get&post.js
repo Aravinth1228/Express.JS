@@ -11,7 +11,7 @@ app.post('/client', (req, res, next) => {
     res.send('<h1>Hello from POST request!</h1>');
 });
 app.use( (req, res, next) => {
-  res.send('<h1>404 Page Error</h1>')
+  res.status(404).send('<h1>404 Page Error</h1>')
     next();
 })
 
