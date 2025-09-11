@@ -1,33 +1,15 @@
 const express = require('express');
 const app = express();
 
-// Middleware - parse JSON body
-app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Fake database (memory la store pannuvom)
-let products = [];
-
-// ✅ POST - Add product
-app.post('/product', (req, res) => {
-    const productName = req.body.name;
-
-    if (!productName) {
-        return res.status(400).send("Product name required");
-    }
-
-    products.push(productName);
-    res.send(`Product '${productName}' added successfully!`);
+app.get('/user', (req, res, next) => {
+    res.send('<h1>Hello from GET request!</h1><form action="/client" method="POST"><button type="submit">Submit POST</button></form>');
 });
 
-// ✅ GET - Get all products
-app.get('/product', (req, res) => {
-    res.json({
-        message: "Available products",
-        products: products
-    });
+app.post('/client', (req, res, next) => {
+    res.send('<h1>Hello from POST request!</h1>');
 });
 
-// Server start
-app.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
-});
+app.listen(3000);
+console.log('Server is running on http://localhost:3000');
